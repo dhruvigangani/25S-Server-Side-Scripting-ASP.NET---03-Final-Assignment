@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: shiftscheduler-application
+    env: dotnet
+    buildCommand: dotnet build --no-restore
+    startCommand: dotnet ShiftSchedularApplication.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: https://0.0.0.0:$PORT;http://0.0.0.0:$PORT
+      - key: PORT
+        value: 80
+      - key: ASPNETCORE_CONNECTION_STRING
+        value: "Server=your-sql-server;Database=ShiftSchedularApplication;User Id=your-username;Password=your-password;TrustServerCertificate=true;MultipleActiveResultSets=true"
+      - key: ASPNETCORE_Kestrel__Limits__MaxRequestBodySize
+        value: "52428800"
+      - key: ASPNETCORE_Kestrel__Limits__MaxRequestBufferSize
+        value: "52428800"
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: FACEBOOK_APP_ID
+        sync: false
+      - key: FACEBOOK_APP_SECRET
+        sync: false
+
+ 

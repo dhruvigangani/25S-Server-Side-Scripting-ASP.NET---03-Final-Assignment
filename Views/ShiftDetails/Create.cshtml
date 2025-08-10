@@ -1,0 +1,78 @@
+@model ShiftDetail
+
+@{
+    ViewData["Title"] = "Create Shift Detail";
+}
+
+<h1>Create Shift Detail</h1>
+
+<h4>Shift Detail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="ShiftId" class="control-label">Shift</label>
+                <select asp-for="ShiftId" class="form-control" asp-items="ViewBag.ShiftId">
+                    <option value="">-- Select Shift --</option>
+                </select>
+                <span asp-validation-for="ShiftId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="TaskDescription" class="control-label">Task Description</label>
+                <input asp-for="TaskDescription" class="form-control" />
+                <span asp-validation-for="TaskDescription" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="TaskStartTime" class="control-label">Task Start Time</label>
+                <input asp-for="TaskStartTime" class="form-control" type="datetime-local" />
+                <span asp-validation-for="TaskStartTime" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="TaskEndTime" class="control-label">Task End Time</label>
+                <input asp-for="TaskEndTime" class="form-control" type="datetime-local" />
+                <span asp-validation-for="TaskEndTime" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="TaskType" class="control-label">Task Type</label>
+                <select asp-for="TaskType" class="form-control">
+                    <option value="">-- Select Task Type --</option>
+                    <option value="Setup">Setup</option>
+                    <option value="Service">Service</option>
+                    <option value="Cleanup">Cleanup</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Administrative">Administrative</option>
+                </select>
+                <span asp-validation-for="TaskType" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Notes" class="control-label">Notes</label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <div class="form-check">
+                    <input asp-for="IsCompleted" class="form-check-input" />
+                    <label asp-for="IsCompleted" class="form-check-label">Task Completed</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
