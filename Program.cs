@@ -117,4 +117,11 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+// Seed default user for local development
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    await ApplicationDbContext.SeedDefaultUserAsync(app.Services);
+}
+
 app.Run();

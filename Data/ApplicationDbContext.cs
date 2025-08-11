@@ -51,5 +51,28 @@ namespace ShiftSchedularApplication.Data
                 .HasForeignKey(sd => sd.ShiftId)
                 .OnDelete(DeleteBehavior.Cascade); // If shift is deleted, delete all details
         }
+
+        public static async Task SeedDefaultUserAsync(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            
+            var defaultUser = await userManager.FindByEmailAsync("dario@gc.ca");
+            if (defaultUser == null)
+            {
+                defaultUser = new IdentityUser
+                {
+                    UserName = "dario@gc.ca",
+                    Email = "dario@gc.ca",
+                    EmailConfirmed = true
+                };
+                
+                var result = await userManager.CreateAsync(defaultUser, "Test123$");
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Failed to create default user: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+                }
+            }
+        }
     }
 }
