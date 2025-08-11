@@ -4,13 +4,13 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["ShiftSchedularApplication.csproj", "./"]
-RUN dotnet restore "ShiftSchedularApplication.csproj"
+COPY ShiftSchedularApplication.csproj ./
+RUN dotnet restore
 COPY . .
-RUN dotnet build "ShiftSchedularApplication.csproj" -c Release -o /app/build
+RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ShiftSchedularApplication.csproj" -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
