@@ -22,4 +22,7 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 LICENSE
-README.md 
+README.md
+DEPLOYMENT_GUIDE.md
+DatabaseSetup.sql
+render.yaml 
