@@ -1,16 +1,14 @@
 services:
   - type: web
-    name: shiftscheduler-application
+    name: shiftschedular-app
     env: dotnet
-    buildCommand: dotnet build --no-restore
-    startCommand: dotnet ShiftSchedularApplication.dll
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/ShiftSchedularApplication.dll
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: ASPNETCORE_URLS
-        value: https://0.0.0.0:$PORT;http://0.0.0.0:$PORT
-      - key: PORT
-        value: 80
+        value: http://0.0.0.0:10000
       - key: ASPNETCORE_CONNECTION_STRING
         value: "Server=your-sql-server;Database=ShiftSchedularApplication;User Id=your-username;Password=your-password;TrustServerCertificate=true;MultipleActiveResultSets=true"
       - key: ASPNETCORE_Kestrel__Limits__MaxRequestBodySize
